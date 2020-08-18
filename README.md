@@ -151,6 +151,20 @@ plotAll(CoefExplainer(peng2, flipper_length_mm ~ bill_length_fct), title = "Step
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
+The MASS package provides a similar function called `contr.sdif()` that
+produces coefficients that have the same values as the ones from the
+`contr.step()` function. The only difference is the intercept. In the
+`contr.step()`, the intercept corresponds to the mean of the first
+group, whereas in the `contr.sdif()` function it is the mean over all
+group means.
+
+``` r
+peng2$bill_length_fct <- C(peng2$bill_length_fct, MASS::contr.sdif)
+plotAll(CoefExplainer(peng2, flipper_length_mm ~ bill_length_fct), title = "MASS Step Contrast")
+```
+
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+
 # Credit
 
 If you find the package useful, also checkout the

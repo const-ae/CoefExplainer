@@ -21,5 +21,6 @@ Imports:
   formula.tools,
   glmGamPoi
 Suggests:
-  palmerpenguins
+  palmerpenguins,
+  MASS
 RoxygenNote: 7.1.0
