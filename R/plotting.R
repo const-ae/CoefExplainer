@@ -32,7 +32,7 @@ plotModel <- function(coefExplFit, showCoefficients = TRUE){
     mutate(group = coefExplFit$groups) %>%
     inner_join(label_df, by = "group") %>%
     ggplot(aes(x = .data$group, y = !!sym(coefExplFit$dependent_var) )) +
-    ggbeeswarm::geom_beeswarm() +
+    ggbeeswarm::geom_quasirandom() +
     geom_segment(data = mean_df,
                  aes(xend = as.numeric(.data$group) - 0.2, y = .data$group_mean, yend = .data$group_mean),
                  color = "red", size = 2) +
