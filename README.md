@@ -136,7 +136,7 @@ plotAll(CoefExplainer(peng2, flipper_length_mm ~ bill_length_fct), title = "Helm
 <img src="man/figures/README-unnamed-chunk-8-4.png" width="100%" />
 
 I find all the coefficients above difficult to interpret. In my opinion,
-for ordered factor a better choice is `contr.step()`:
+for ordered factors a better choice is `contr.step()`:
 
 ``` r
 contr.step <- function(n){

@@ -95,7 +95,7 @@ peng2$bill_length_fct <- C(peng2$bill_length_fct, contr.helmert)
 plotAll(CoefExplainer(peng2, flipper_length_mm ~ bill_length_fct), title = "Helmert Contrast")
 ```
 
-I find all the coefficients above difficult to interpret. In my opinion, for ordered factor a better choice is `contr.step()`:
+I find all the coefficients above difficult to interpret. In my opinion, for ordered factors a better choice is `contr.step()`:
 
 ```{r}
 contr.step <- function(n){
