@@ -37,6 +37,8 @@
 #'
 #' @export
 CoefExplainer <- function(data, formula){
+  data <- as.data.frame(data)
+
   dependent_var <- as.character(formula.tools::lhs.vars(formula))
   stopifnot(length(dependent_var) == 1)
   pf <- parent.frame()
