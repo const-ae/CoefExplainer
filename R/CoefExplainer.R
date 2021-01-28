@@ -44,7 +44,7 @@ CoefExplainer <- function(data, formula){
   pf <- parent.frame()
   data[dependent_var] <- get_var(dependent_var, data, enclos = pf)
 
-  independent_vars <- formula.tools::rhs.vars(formula)
+  independent_vars <- get_rhs(formula, data)
   data[independent_vars] <- lapply(independent_vars, function(v){
     get_var(v, data, enclos = pf)
   })
@@ -123,5 +123,24 @@ CoefExplainer <- function(data, formula){
 get_var <- function(term, data, enclos = parent.frame()){
   eval(parse(text=term), envir = data, enclos = enclos)
 }
+
+
+#'
+#'
+#' formulatools::rhs.vars is problematic if a term only appears in the
+#' interaction term...
+get_rhs <- function(formula, data){
+  terms <- terms(formula, data = data)
+  vars <- attr(terms, "variables")
+  vars_vec <- vapply(seq_len(length(vars)-1)+1, function(idx) as.character(vars[[idx]]), FUN.VALUE = "")
+  response_var_idx <- attr(terms, "response")
+  if(response_var_idx == 0){
+    vars_vec
+  }else{
+    vars_vec[-response_var_idx]
+  }
+}
+
+
 
 
