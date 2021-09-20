@@ -86,7 +86,7 @@ plotModelMatrix <- function(coefExplFit){
     geom_text(aes(label = round(.data$value, digits = 1))) +
     scale_y_continuous(breaks = seq_len(coefExplFit$n_groups), labels = coefExplFit$labels,
                        name = "group", trans = "reverse") +
-    scale_x_discrete(position = "top")
+    scale_x_discrete(position = "top", guide = guide_axis(n.dodge = 3))
 
 }
 
@@ -112,17 +112,17 @@ plotCoef <- function(coefExplFit, interceptSeparate = TRUE){
       filter(! .data$Intercept) %>%
       ggplot(aes(x = .data$covariate, y = .data$magnitude)) +
       geom_col(aes(fill = .data$covariate), show.legend = FALSE) +
-      scale_x_discrete(position = "top") +
+      scale_x_discrete(position = "top", guide = guide_axis(n.dodge = 3)) +
       scale_fill_discrete(drop=FALSE)
 
     cowplot::plot_grid(p1, p2, nrow = 1, rel_widths = c(2, sum(! tmp$Intercept) + 1),
-                       align = "v")
+                       align = "h")
   }else{
     tibble(covariate = factor(names(coefExplFit$beta), levels = names(coefExplFit$beta)),
            magnitude = coefExplFit$beta) %>%
       ggplot(aes(x = .data$covariate, y = .data$magnitude)) +
       geom_col(aes(fill = .data$covariate)) +
-      scale_x_discrete(position = "top")
+      scale_x_discrete(position = "top", guide = guide_axis(n.dodge = 3))
   }
 
 
