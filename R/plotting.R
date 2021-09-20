@@ -137,8 +137,8 @@ plotCoef <- function(coefExplFit, interceptSeparate = TRUE){
 #' @export
 plotAll <- function(coefExplFit, title = as.character(coefExplFit$formula)){
   ptitle <- cowplot::ggdraw() + cowplot::draw_label(label = title)
-  p1 <- plotModel(coefExplFit) + guides(color = FALSE)
-  p2 <- plotModelMatrix(coefExplFit) + guides(color = FALSE)
+  p1 <- plotModel(coefExplFit) + guides(color = "none")
+  p2 <- plotModelMatrix(coefExplFit) + guides(color = "none")
   p3 <- plotCoef(coefExplFit)
   cowplot::plot_grid(ptitle, p1, cowplot::plot_grid(p2,p3, nrow = 1), nrow = 3, rel_heights = c(0.2, 1, 0.8))
 }
