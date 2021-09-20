@@ -60,7 +60,8 @@ plotModel <- function(coefExplFit, showCoefficients = TRUE){
       geom_segment(data = coef_df,
                    aes(x = .data$group + .data$nparam * 0.03, xend = .data$group + .data$nparam * 0.03 ,
                        y = .data$start, yend = .data$end, color = .data$covariate),
-                   size = 2)
+                   size = 2) +
+        scale_color_discrete(drop = FALSE)
 
   }
 
