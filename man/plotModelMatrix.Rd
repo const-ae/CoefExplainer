@@ -4,10 +4,18 @@
 \alias{plotModelMatrix}
 \title{Visualize each combination of covariates of the model matrix}
 \usage{
-plotModelMatrix(coefExplFit)
+plotModelMatrix(
+  coefExplFit,
+  model_matrix = coefExplFit$model_matrix,
+  sel_rows = coefExplFit$example_for_groups_idx
+)
 }
 \arguments{
 \item{coefExplFit}{the result from the \code{\link{CoefExplainer}()}.}
+
+\item{model_matrix}{a model matrix. By default taken from the `coefExplFit` object.}
+
+\item{sel_rows}{which rows of the model matrix to look at. By default taken from the `coefExplFit` object.}
 }
 \description{
 Visualize each combination of covariates of the model matrix

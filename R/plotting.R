@@ -71,23 +71,36 @@ plotModel <- function(coefExplFit, showCoefficients = TRUE){
 #' Visualize each combination of covariates of the model matrix
 #'
 #' @inheritParams plotModel
+#' @param model_matrix a model matrix. By default taken from the `coefExplFit` object.
+#' @param sel_rows which rows of the model matrix to look at. By default taken from the `coefExplFit` object.
 #'
 #'
 #' @export
-plotModelMatrix <- function(coefExplFit){
+plotModelMatrix <- function(coefExplFit,
+                            model_matrix = coefExplFit$model_matrix,
+                            sel_rows = coefExplFit$example_for_groups_idx){
 
-  as_tibble(coefExplFit$model_matrix[coefExplFit$example_for_groups_idx, ]) %>%
-    mutate(group = seq_len(coefExplFit$n_groups)) %>%
+  if(! missing(coefExplFit) && all(coefExplFit$example_for_groups_idx == sel_rows)){
+    labels <- coefExplFit$labels
+  }else{
+    labels <- if(! is.null(names(sel_rows))){
+      names(sel_rows)
+    }else{
+      paste0("Example ", seq_along(sel_rows))
+    }
+  }
+
+  as_tibble(model_matrix[sel_rows, ,drop=FALSE]) %>%
+    mutate(group = seq_along(sel_rows)) %>%
     pivot_longer(cols = -.data$group, names_to = "covariate", values_to = "value") %>%
-    mutate(covariate = factor(.data$covariate, levels = names(coefExplFit$beta))) %>%
+    mutate(covariate = factor(.data$covariate, levels = colnames(model_matrix))) %>%
     ggplot(aes(x = .data$covariate, y = .data$group)) +
     geom_point(data= function(x) filter(x, abs(.data$value) > 1e-10), size = 5, aes(color = .data$covariate)) +
     geom_point(data= function(x) filter(x, abs(.data$value) <= 1e-10), size = 5, color = "lightgrey") +
     geom_text(aes(label = round(.data$value, digits = 1))) +
-    scale_y_continuous(breaks = seq_len(coefExplFit$n_groups), labels = coefExplFit$labels,
+    scale_y_continuous(breaks = seq_along(sel_rows), labels = labels,
                        name = "group", trans = "reverse") +
     scale_x_discrete(position = "top", guide = guide_axis(n.dodge = 3))
-
 }
 
 #' Make a bar plot of the coefficients
