@@ -1,7 +1,7 @@
 Package: CoefExplainer
 Type: Package
 Title: Understand How to Interpret the Coefficients of a Categorical Linear Model
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", 
                     role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3762-068X"))
 Description: More about what it does (maybe more than one line)
