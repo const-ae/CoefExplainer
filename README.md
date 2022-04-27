@@ -4,7 +4,6 @@
 # CoefExplainer
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 Understand How to Interpret the Coefficients of a Categorical Linear
@@ -29,20 +28,20 @@ peng <- palmerpenguins::penguins
 # Remove any NA's
 peng <- peng[! apply(peng, 1, function(row) any(is.na(row))), ]
 peng
-#> # A tibble: 333 x 7
-#>    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
-#>    <fct>   <fct>           <dbl>         <dbl>            <int>       <int>
-#>  1 Adelie  Torge…           39.1          18.7              181        3750
-#>  2 Adelie  Torge…           39.5          17.4              186        3800
-#>  3 Adelie  Torge…           40.3          18                195        3250
-#>  4 Adelie  Torge…           36.7          19.3              193        3450
-#>  5 Adelie  Torge…           39.3          20.6              190        3650
-#>  6 Adelie  Torge…           38.9          17.8              181        3625
-#>  7 Adelie  Torge…           39.2          19.6              195        4675
-#>  8 Adelie  Torge…           41.1          17.6              182        3200
-#>  9 Adelie  Torge…           38.6          21.2              191        3800
-#> 10 Adelie  Torge…           34.6          21.1              198        4400
-#> # … with 323 more rows, and 1 more variable: sex <fct>
+#> # A tibble: 333 × 8
+#>    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+#>    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+#>  1 Adelie  Torgersen           39.1          18.7               181        3750
+#>  2 Adelie  Torgersen           39.5          17.4               186        3800
+#>  3 Adelie  Torgersen           40.3          18                 195        3250
+#>  4 Adelie  Torgersen           36.7          19.3               193        3450
+#>  5 Adelie  Torgersen           39.3          20.6               190        3650
+#>  6 Adelie  Torgersen           38.9          17.8               181        3625
+#>  7 Adelie  Torgersen           39.2          19.6               195        4675
+#>  8 Adelie  Torgersen           41.1          17.6               182        3200
+#>  9 Adelie  Torgersen           38.6          21.2               191        3800
+#> 10 Adelie  Torgersen           34.6          21.1               198        4400
+#> # … with 323 more rows, and 2 more variables: sex <fct>, year <int>
 ```
 
 We can now load the `CoefExplainer` package and parse a formula for a
@@ -60,8 +59,6 @@ There are three different ways to look at the model:
     that group (blue line) and how that line compares against the true
     group mean (red line).
 
-<!-- end list -->
-
 ``` r
 plotModel(coefExplFit)
 ```
@@ -70,8 +67,6 @@ plotModel(coefExplFit)
 
 2.  We can also look at the underlying model matrix
 
-<!-- end list -->
-
 ``` r
 plotModelMatrix(coefExplFit)
 ```
@@ -79,8 +74,6 @@ plotModelMatrix(coefExplFit)
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 3.  And lastly, we can look at the magnitude of each coefficient.
-
-<!-- end list -->
 
 ``` r
 plotCoef(coefExplFit)
@@ -169,4 +162,4 @@ plotAll(CoefExplainer(peng2, flipper_length_mm ~ bill_length_fct), title = "MASS
 
 If you find the package useful, also checkout the
 <http://www.bioconductor.org/packages/ExploreModelMatrix/> by Charlotte
-Soneson et al.
+Soneson et al. 
