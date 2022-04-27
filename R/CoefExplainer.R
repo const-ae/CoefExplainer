@@ -98,7 +98,7 @@ CoefExplainer <- function(data, formula){
 
   # create labels
   labels <- vapply(example_for_groups_idx, function(idx){
-    paste0(independent_vars, "=", unlist(data[idx, independent_vars]), collapse = "\n")
+    paste0(independent_vars, "=", vapply(data[idx, independent_vars], as.character, character(1L)), collapse = "\n")
   }, FUN.VALUE = "")
 
   # Fit a linear model
